@@ -79,11 +79,11 @@ def coco_classes():
 
 def mydata_classes():
     return [
-        'person','x'
+        'bg','person','x'
     ]
 def mydata2_classes():
     return [
-        'R','person','x','4','5','6','7','8','9','10','11','12','13','14','R','16','17','18'
+        'bg','R','person','x','4','5','6','7','8','9','10','11','12','13','14','R','16','17','18'
     ]
 dataset_aliases = {
     'voc': ['voc', 'pascal_voc', 'voc07', 'voc12'],

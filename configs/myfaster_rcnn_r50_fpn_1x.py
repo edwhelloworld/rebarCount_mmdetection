@@ -18,8 +18,8 @@ model = dict(
         type='RPNHead',
         in_channels=256,
         feat_channels=256,
-        anchor_scales=[8],
-        anchor_ratios=[0.5, 1.0, 2.0],
+        anchor_scales=[8],#4,8
+        anchor_ratios=[0.5, 1.0, 2.0],#宽高比为： 1:2, 1:1, 2:1
         anchor_strides=[4, 8, 16, 32, 64],
         target_means=[.0, .0, .0, .0],
         target_stds=[1.0, 1.0, 1.0, 1.0],
@@ -82,18 +82,18 @@ test_cfg = dict(
         nms_thr=0.7,
         min_bbox_size=0),
     rcnn=dict(
-        score_thr=0.05, nms=dict(type='nms', iou_thr=0.5), max_per_img=100)
+        score_thr=0.05, nms=dict(type='nms', iou_thr=0.5), max_per_img=500)#100
     # soft-nms is also supported for rcnn testing
     # e.g., nms=dict(type='soft_nms', iou_thr=0.5, min_score=0.05)
 )
 # dataset settings
 dataset_type = 'CustomDataset'#'CocoDataset'
-data_root = '../../data/'
+data_root = '../data/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 data = dict(
-    imgs_per_gpu=2,#2,#batchsize= imgs_per_gpu * gpu_num
-    workers_per_gpu=2,
+    imgs_per_gpu=1,#2,#batchsize= imgs_per_gpu * gpu_num
+    workers_per_gpu=1,
     train=dict(
         type=dataset_type,
         ann_file=data_root + 'train/RebarTrain_1.pkl',
@@ -128,7 +128,7 @@ data = dict(
         with_label=False,
         test_mode=True))
 # optimizer                  lr=0.02(recommend:0.0025)
-optimizer = dict(type='SGD', lr=0.005, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.008, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
 # learning policy
 lr_config = dict(

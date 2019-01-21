@@ -48,7 +48,7 @@ def inference_detector(model, imgs, cfg, device='cuda:0'):
         return _inference_generator(model, imgs, img_transform, cfg, device)
 
 
-def show_result(img, result, dataset='coco', score_thr=0.3,thick=1,outfile=None):
+def show_result(img, result, dataset='coco', score_thr=0.3,thick=1,imgshow=True,outfile=None):
     class_names = get_classes(dataset)
     labels = [
         np.full(bbox.shape[0], i, dtype=np.int32)
@@ -64,6 +64,7 @@ def show_result(img, result, dataset='coco', score_thr=0.3,thick=1,outfile=None)
         class_names=class_names,
         score_thr=score_thr,
         thickness=thick,
+        show=imgshow,
         out_file=outfile
     )
 
